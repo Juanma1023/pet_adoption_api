@@ -47,6 +47,10 @@ def modified_user(email: str, name: str, last_name: str, phone: int, address: st
     return user_service.update_user(email, name, last_name, phone, address)
 
 
+@router.get("/admin/list_users",
+tags=["admin"], status_code=status.HTTP_200_OK, dependencies= [Depends(get_db)])
+def get_list_users_admin():
+    return user_service.get_list_users_admin()
 
 @router.delete("/user/delete/{id}", tags=["users"], status_code=status.HTTP_200_OK)
 def delete_user(id: int):
