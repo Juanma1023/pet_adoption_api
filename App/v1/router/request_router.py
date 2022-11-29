@@ -69,6 +69,11 @@ tags=["users"], status_code=status.HTTP_200_OK, dependencies= [Depends(get_db)])
 def get_list_request_user(id_user: int):
     return request_service.get_list_request(id_user)
 
+@router.get("/admin/list_request",
+tags=["admin"], status_code=status.HTTP_200_OK, dependencies= [Depends(get_db)])
+def get_list_request_admin():
+    return request_service.get_list_request_admin()
+
 @router.delete("/user/request/delete/{id}", tags=["users"], status_code=status.HTTP_200_OK)
 def delete_request(id: int):
     request_service.delete_request(id)
