@@ -79,6 +79,24 @@ def update_user(email: str, name: str, last_name: str, phone: int, address: str)
         address= user.address
     )
 
+def get_list_users_admin():
+    list_users = []
+    for i in range(0, 100):
+        user = UserModel.filter((UserModel.id ==i)).first()
+        if user is None:
+            i += 1
+        else:
+            list_users.append(user_schema.User(
+                id = user.id,
+                email= user.email,
+                name = user.name,
+                last_name = user.last_name,
+                phone = user.phone,
+                address= user.address
+            )
+        )
+    return list_users
+
 
 def delete_user(id_user: int):
     user = UserModel.filter((UserModel.id == id_user)).first()
