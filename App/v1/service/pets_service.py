@@ -119,6 +119,28 @@ def get_list_pets(id_user: int):
         ))
     return list_pets
 
+
+def get_pet_list_admin():
+    list_pets = []
+    for i in range(0, 100):
+        pets = PetsModel.filter((PetsModel.user == i)).first()
+        if pets is None:
+            i += 1
+        else:
+            list_pets.append(pets_schema.Pets(
+                id = pets.id,
+                name = pets.name,
+                age= pets.age,
+                gender= pets.gender,
+                size= pets.size,
+                description= pets.description,
+                sterilized= pets.sterilized,
+                created_at= pets.created_at,
+                modified_at= pets.modified_at
+            )
+        )
+    return list_pets
+
 def delete_pet(pet_id: int):
     pet = PetsModel.filter((PetsModel.id == pet_id)).first()
 
