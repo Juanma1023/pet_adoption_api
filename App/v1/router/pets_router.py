@@ -66,6 +66,11 @@ tags=["users"], status_code=status.HTTP_200_OK, dependencies= [Depends(get_db)])
 def get_list_pets_user(id_user: int):
     return pets_service.get_list_pets(id_user)
 
+@router.get("/admin/list_pets",
+tags=["admin"], status_code=status.HTTP_200_OK, dependencies= [Depends(get_db)])
+def get_list_pets_admin():
+    return pets_service.get_pet_list_admin()
+
 @router.delete("/user/delete-pet/{id}", tags=["users"], status_code=status.HTTP_200_OK)
 def delete_pet(id: int):
     pets_service.delete_pet(id)
