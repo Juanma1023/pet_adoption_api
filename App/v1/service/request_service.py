@@ -115,6 +115,23 @@ def get_list_request(id_user: int):
     )
     return list_req
 
+def get_list_request_admin():
+    list_req = []
+    for i in range(0, 100):
+        request = RequestModel.filter((RequestModel.id ==i)).first()
+        if request is None:
+            i += 1
+        else:
+            list_req.append(request_schema.Request(
+                id = request.id,
+                status_request= request.status_request,
+                description= request.description,
+                created_at= request.created_at,
+                modified_at= request.modified_at
+            )
+        )
+    return list_req
+
 def delete_request(id_req: int):
     request = RequestModel.filter((RequestModel.id == id_req)).first()
 
